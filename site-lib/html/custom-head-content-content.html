@@ -4,18 +4,19 @@
 <style>
 
 .menuButton{
-  background: url("./media/icons/menu.svg");
-  width: 40px;
-  height: 40px;
-  background-size: contain;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0px;
+  right: 0px;
   display: none;
   z-index: 100;
-  padding: 10px;
   background-color: transparent !important;
   border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 9px;
+  background-position: center;
+  filter: drop-shadow(5px 5px 10px var(--blockquote-border-color));
+  width: 100px;
 }
 
 @font-face {
@@ -93,7 +94,7 @@ function hideMenu() {
 
 <body>
 
-  <button class="menuButton" onclick="hideMenu()"></button>
+  <img src="./media/icons/layers.svg"  class="menuButton" onclick="hideMenu()"></div>
 
   <nav id="menu">
     <a  href="index.html"  class="internal-link" data-href="index.md" target="_self" rel="noopener nofollow" ><h1 class="home">Home</h1></a>
