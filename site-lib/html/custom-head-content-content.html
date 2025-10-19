@@ -1,11 +1,22 @@
 
-<nav>
-<a  href="index.html"  class="internal-link" data-href="index.md" target="_self" rel="noopener nofollow" ><h1 class="home">Home</h1></a>
-<a  href="Methods.html"  class="internal-link" data-href="Methods.md" target="_self" rel="noopener nofollow" ><h1 class="methods">Methods</h1></a>
-<a  href="Practice.html" class="internal-link" data-href="Practice.md" target="_self" rel="noopener nofollow"><h1 class="practice">Practice</h1></a>
-</nav>
+
 
 <style>
+
+.menuButton{
+  background: url("./media/icons/menu.svg");
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+  z-index: 100;
+  padding: 10px;
+  background-color: transparent !important;
+  border: none;
+}
 
 @font-face {
   font-family: Velvelyne; /* set name */
@@ -13,39 +24,23 @@
 }
 
 nav a h1 {
-
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-	/* padding: 10px; */
 	padding: 34px;
-	margin: 15px;
-	margin: 17px;
-	/* border-radius: 18px; */
+	margin: -6px;
 	text-align: center;
-	/* color: var(--link-color); */
-	/* border-color: color: var(--link-color); */
-	/* border-width: 96em; */
-	/* outline: 1px solid var(--link-color); */
-
+	outline: 1px solid var(--link-color); 
+  rotate: 29deg;
+  border-radius: 50px;
 }
 
-.methods {
-	background-image: url('media/braces.svg');
+nav a h1:hover {
+
+  box-shadow: 0px 0px 100px var(--blockquote-border-color); 
 }
 
-.practice {
-	background-image: url('media/docs-wide.svg');
-}
-
-.home {
-	background-image: url('media/man-input.svg');
-}
 
 nav {
   position: absolute;
   z-index: 10;
-  box-shadow: 0px 0px 100px var(--blockquote-border-color);
   padding: 12px;
   border-radius: 10px;
   margin: 1%;
@@ -54,7 +49,59 @@ nav {
 body #center-content > .obsidian-document > .markdown-preview-sizer {
   padding-bottom: 32px;
   }
+
+  @media (max-width: 1250px) {
+    .menuButton{
+      display: inline;
+    }
+    nav {
+      display: flex;
+      position: relative;
+      margin: 23px;
+      flex-wrap: wrap;
+    }
+
+    nav a h1 {
+      padding: 39px;
+      margin: -4px;
+      margin-right: -20px;
+    }
+
+    #menu {
+      display: none;
+    }
+
+    .responsive{
+      display: flex !important;
+    }
+
+  }
+
 </style>
+
+<script>
+
+function hideMenu() {
+  var x = document.getElementById("menu");
+  if (x.className === "") {
+    x.className = "responsive";
+  } else {
+    x.className = "";
+  }
+} </script>
+
+
+<body>
+
+  <button class="menuButton" onclick="hideMenu()"></button>
+
+  <nav id="menu">
+    <a  href="index.html"  class="internal-link" data-href="index.md" target="_self" rel="noopener nofollow" ><h1 class="home">Home</h1></a>
+    <a  href="Methods.html"  class="internal-link" data-href="Methods.md" target="_self" rel="noopener nofollow" ><h1 class="methods">Methods</h1></a>
+    <a  href="Practice.html" class="internal-link" data-href="Practice.md" target="_self" rel="noopener nofollow"><h1 class="practice">Practice</h1></a>
+    <a  href="Practice.html" class="internal-link" data-href="Practice.md" target="_self" rel="noopener nofollow"><h1 class="practice">Glossary</h1></a>
+  </nav>
+</body>
 
 <!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
