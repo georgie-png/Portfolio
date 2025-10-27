@@ -54,7 +54,7 @@ class obj2Mer {
 
         let nodeName = item.label.replace(/ /g,"_")
         node_names.push(nodeName);
-        graphText +=  nodeName + "@{ img: '" + item.img + `', label: '<h3>` + item.label + "</h3>', h: 80, constraint: 'on' }" + "\n ";
+        graphText +=  nodeName + "@{ img: '" + item.img + "', h: 80, constraint: 'on' }" + "\n ";
 
        
 
