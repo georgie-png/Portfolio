@@ -15,36 +15,43 @@ function start() {
 
   eleM = document.querySelector('.mermaid');
 
+
   merGraph = new obj2Mer();
-  graphName = "";
+  graphName = ""
   obj =   {
-              "steps": [
-                "access",
-                "in touch",
-                "friction",
-                "reverberate",
-                "impress", 
-                "configurations"
-              ],
-              "movements": [
-                "cripping",
-                "slow",
-                "misfit",
-                "deviate",
-                "shape",
-              ]
-            };
+                  "steps": [
+                    {"label":"Wiggle Room", "img":"https://georgie-png.github.io/Portfolio/media/icons/configure-able.svg", "url": "glossary.html"},
+                    {"label":"affirmation", "img":"https://georgie-png.github.io/Portfolio/media/icons/cozy.svg", "url": "glossary.html"},
+                    {"label":"backgrounds", "img":"https://georgie-png.github.io/Portfolio/media/icons/background.svg", "url": "glossary.html"},
+                    {"label":"feel out", "img":"https://georgie-png.github.io/Portfolio/media/icons/in-configure.svg", "url": "glossary.html"},
+                    {"label":"make sense", "img":"https://georgie-png.github.io/Portfolio/media/icons/knowledge-graph.svg", "url": "glossary.html"},
+                    {"label":"tables", "img":"https://georgie-png.github.io/Portfolio/media/icons/layers.svg", "url": "glossary.html"},
+                  ],
+                  "movements": [
+                    "cripping",
+                    "slow",
+                    "misfit",
+                    "deviate",
+                    "shape",
+                    "friction",
+                    "hold",
+                    "care",
+                  ]
+              }
 
   mermaidDraw();
-   
+
   eleM.addEventListener('click',mermaidDraw)
-  }
+        
+
+}
 
 
 
 // main function called by button 
 async function mermaidDraw() {
- console.log("here");
+
+
   shuffle(obj.steps)
   merGraph.setObj(obj, graphName);
   let rotation = (eleM.offsetWidth > eleM.offsetHeight);

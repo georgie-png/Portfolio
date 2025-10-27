@@ -1,11 +1,17 @@
 
 mermaid.initialize({
   startOnLoad: false,
-  theme: 'base',
-  maxTextSize: 155550000,
+  securityLevel: 'loose'
 });
 
-
+const mermaidConfig = `
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#00FF0000'
+    primaryBorderColor: '#00FF0000'
+    secondaryColor: '#FFFFFF'
+`
 
 // class that turns a sections object into a mermaid qraph
 class obj2Mer {
@@ -16,17 +22,19 @@ class obj2Mer {
   mermaidTextLR = "flowchart LR\n ";
   mermaidTextTD = "flowchart TD\n ";
 
-  arrowTypes = [" --> ", " ---> ", " ----> ", " -.-> ", " -..-> ", " -...-> ", " -.- ", " -..- ", " -...- ", " ==> ", " ===> ", " ====> ", " === ", " ==== ", " ===== ", " ~~~ ", " --- ", " ---- ", " ----- ", " --o ", " --x ", "o--o", " <--> ", " x--x "];
+  
+
+  arrowTypes = [" --> ", " ---> ", " ----> ", " -.-> ", " -..-> ", " -...-> ", " -.- ", " -..- ", " -...- ", " ==> ", " ===> ", " ====> ", " === ", " ==== ", " ===== ", " ~~~ ", " --- ", " ---- ", " ----- ", " --o ", " --x ", " o--o ", " <--> ", " x--x "];
   nodeTypes = ['(_)', '([_])', '[[_]]', '[(_)]', '((_))', '>_]', '{_}', '{{_}}', '[/_/]', '[\\_\\]', '[/_\\]', '[\\_/]', '(((_)))'];
 
   setObj(graph_obj, graph_name) {
+
     this.graph_obj = graph_obj;
     this.graph_name = graph_name
   }
 
   // main function called by button 
   async GenGraph(portrait = true) {
-
 
     try {
 
@@ -38,59 +46,69 @@ class obj2Mer {
       }
 
       // add title
-      let title = "\n" + "---" + "\n" + "title: " + this.graph_name + "\n" + "---" + "\n";
+      let title = "\n" + "---" + "\n" + mermaidConfig + "---" + "\n";
       graphText = title + graphText;
+      let node_names = [];
       // loop over object to generate graph
       this.graph_obj.steps.forEach((item) => {
+
+        let nodeName = item.label.replace(/ /g,"_")
+        node_names.push(nodeName);
+        graphText +=  nodeName + "@{ img: '" + item.img + `', label: '<h3>` + item.label + "</h3>', h: 80, constraint: 'on' }" + "\n ";
+
+       
+
         // select an arrow type
-        let arrow = this.arrowTypes[Math.floor(Math.random() * this.arrowTypes.length)];
+        //let arrow = this.arrowTypes[Math.floor(Math.random() * this.arrowTypes.length)];
         // select a node type
-        let node = this.nodeTypes[Math.floor(Math.random() * this.nodeTypes.length)].split("_");
+        //let node = this.nodeTypes[Math.floor(Math.random() * this.nodeTypes.length)].split("_");
 
-        // randomly add text to some arrows
-        if (Math.random() > 0.6) {
-          arrow += "|" + this.graph_obj.movements[Math.floor(Math.random() * this.graph_obj.movements.length)] + "|";
-        }
-        // if first node write only first section
-        if (lastNode == 0) {
-          graphText += lastNode.toString() + node[0] + item + node[1] + arrow;
-        }
-        // if second node setup flow
-        else if (lastNode == 1) {
-          graphText += lastNode.toString() + node[0] + item + node[1] + "\n ";
-        }
-        else { // loop over the rest of the nodes
-          graphText += (lastNode - 1).toString() + arrow + lastNode.toString() + node[0] + item + node[1] + "\n ";
-        }
+        // randomly add text to some joining arrows
+        //if (Math.random() > 0.6) {
+        //  arrow += "|" + this.graph_obj.movements[Math.floor(Math.random() * this.graph_obj.movements.length)] + "|";
+        //}
 
-        lastNode++;
+        // if first node/loop write only first section
+        //if (lastNode == 0) {
+          //graphText += lastNode.toString() + node[0] + item + node[1] + arrow;
+        //}
+        // if second node/loop setup flow
+        //else if (lastNode == 1) {
+          //graphText += lastNode.toString() + node[0] + item + node[1] + "\n ";
+        //}
+        //else { // loop over the rest of the nodes
+          //graphText += (lastNode - 1).toString() + arrow + lastNode.toString() + node[0] + item + node[1] + "\n ";
+        //}
+
+        //lastNode++;
       });
       // randomize num of extra arrows/loops to add
-      let numLoops = Math.floor(10 + Math.random(10));
+      let numLoops = 10 + Math.floor( Math.random()*15);
 
       // loop that many times
       for (let i = 0; i < numLoops; i++) {
         // chose an arrow type
         let arrow = this.arrowTypes[Math.floor(Math.random() * this.arrowTypes.length)];
         // get the nodes to go to and from
-        let from = this.getRandomNodeIndx(this.graph_obj);
-        let to = this.getRandomNodeIndx(this.graph_obj);
+        let from = node_names[Math.floor(Math.random() * node_names.length)]; //this.getRandomNodeIndx(this.graph_obj);
+        let to = node_names[Math.floor(Math.random() * node_names.length)]; //this.getRandomNodeIndx(this.graph_obj);
         // add text randomly to some arrows
-        if (Math.random() > 0.7) {
-          arrow += "|" + this.graph_obj.movements[Math.floor(Math.random() * this.graph_obj.movements.length)] + "|";
+        if (Math.random() > 0.65) {
+          arrow += "| <h4>" + this.graph_obj.movements[Math.floor(Math.random() * this.graph_obj.movements.length)] + "</h4>|";
         }
-        // if arrow points to self 50% of time randomly loop it to another node
-        if (from == to && Math.random() > 0.5) {
-          if (to == 0) { to++ }
-          else { to-- }
+        // if arrow points to self 40% of time randomly loop it to another node
+        if (from == to && Math.random() > 0.4) {
+          to = node_names[Math.floor(Math.random() * node_names.length)];
         }
         // add the arrows to the text
         graphText += from.toString() + arrow + to.toString() + "\n ";
       }
       // add the styling for the nodes
-      for (let i = 0; i < this.graph_obj.steps.length; i++) {
-        graphText += "style " + i.toString() + " fill:" + this.randomHexColorCode() + ",stroke:#333,color:#fff,stroke-width:4px" + "\n ";
-      }
+      //for (let i = 0; i < this.graph_obj.steps.length; i++) {
+      //  graphText += "style " + i.toString() + " fill:" + this.randomHexColorCode() + ",stroke:#333,color:#fff,stroke-width:4px" + "\n ";
+      //}
+
+      console.log(graphText);
 
       let graphDefinition = await this.mermaidEval(graphText);
 
@@ -99,6 +117,7 @@ class obj2Mer {
       const {
         svg
       } = await mermaid.render('graphDiv', graphDefinition);
+
 
       return {
         svg: svg,
@@ -111,7 +130,7 @@ class obj2Mer {
       if (err instanceof ReferenceError) {
         let varname = err.message.split(' ')[0];
         window[varname] = varname;
-        setTimeout(this.GenGraph, 1);
+        setTimeout(this.GenGraph, 0);
       }
       console.error(err);
 
