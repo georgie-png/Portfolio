@@ -34,11 +34,9 @@ class obj2Mer {
   }
 
   // main function called by button 
-  async GenGraph(portrait = true) {
+  async GenGraph(portrait = true, label = false) {
 
     try {
-
-      let lastNode = 0
       // set rotation
       let graphText = this.mermaidTextTD;
       if (portrait) {
@@ -52,11 +50,17 @@ class obj2Mer {
       // loop over object to generate graph
       this.graph_obj.steps.forEach((item) => {
 
-        let nodeName = item.label.replace(/ /g,"_")
-        node_names.push(nodeName);
-        graphText +=  nodeName + "@{ img: '" + item.img + "', h: 80, constraint: 'on' }" + "\n ";
+        let nodeName = item.label.replace(/ /g,"_");
 
-       
+        node_names.push(nodeName);
+
+        graphText +=  nodeName + "@{ img: '" + item.img;
+
+        if(label===true){
+          graphText+= `', label: '<h3>` + item.label + "</h3>";
+        }
+        
+        graphText  += "', h: 80, constraint: 'on' }" + "\n ";
 
         // select an arrow type
         //let arrow = this.arrowTypes[Math.floor(Math.random() * this.arrowTypes.length)];

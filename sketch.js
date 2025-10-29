@@ -59,7 +59,7 @@ async function mermaidDraw() {
 
   if (typeof result_graph === 'object' && !Array.isArray(result_graph) && result_graph !== null) {
     //console.log(result_graph.svg);
-    eleM.setAttribute("alt", result_graph.alt_description);
+    eleM.setAttribute("aria-label", result_graph.alt_description);
     eleM.innerHTML = result_graph.svg;
   }
 
