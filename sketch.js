@@ -28,14 +28,6 @@ function start() {
                     {"label":"tables", "img":"https://georgie-png.github.io/Portfolio/media/icons/layers.svg", "url": "glossary.html"},
                   ],
                   "movements": [
-                    "cripping",
-                    "slow",
-                    "misfit",
-                    "deviate",
-                    "shape",
-                    "friction",
-                    "hold",
-                    "care",
                   ]
               }
 

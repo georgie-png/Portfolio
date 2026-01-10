@@ -24,47 +24,64 @@
   src: url(Velvelyne-Regular.woff); /* url of the font */
 }
 
-nav a h1 {
+li.nav {
 	padding: 34px;
 	margin: -6px;
 	text-align: center;
 	outline: 1px solid var(--link-color); 
   rotate: 29deg;
   border-radius: 50px;
+	font-weight: var(--inline-title-weight);
+	font-size: var(--inline-title-size);
+	font-style: var(--inline-title-style);
+	font-variant: var(--inline-title-variant);
+	font-family: var(--inline-title-font);
+	letter-spacing: -.015em;
+	color: var(--inline-title-color);
+
+  
 }
 
-nav a h1:hover {
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li.nav:hover {
 
   box-shadow: 0px 0px 100px var(--blockquote-border-color); 
 }
 
 
-nav {
+nav ul {
   position: absolute;
   z-index: 10;
   padding: 12px;
   border-radius: 10px;
   margin: 1%;
   padding-right: 100px;
-  padding-top: 25%;
 }
 
 body #center-content > .obsidian-document > .markdown-preview-sizer {
   padding-bottom: 32px;
   }
 
-  @media (max-width: 1250px) {
+  @media (max-width: 1300px) {
     .menuButton{
       display: inline;
     }
     nav {
+      position: initial;
+    }
+    nav ul {
       display: flex;
       position: relative;
       margin: 23px;
       flex-wrap: wrap;
     }
 
-    nav a h1 {
+    li.nav {
       padding: 39px;
       margin: -4px;
       margin-right: -20px;
@@ -99,11 +116,23 @@ function hideMenu() {
   <img src="./media/icons/layers.svg"  class="menuButton" onclick="hideMenu()"></div>
 
   <nav id="menu">
-    <a  href="index.html"  class="internal-link" data-href="index.md" target="_self" rel="noopener nofollow" ><h1 class="home">Home</h1></a>
-    <a  href="methods.html"  class="internal-link" data-href="methods.md" target="_self" rel="noopener nofollow" ><h1 class="methods">Methods</h1></a>
-    <a  href="practice.html" class="internal-link" data-href="practice.md" target="_self" rel="noopener nofollow"><h1 class="practice">Practice</h1></a>
-    <a  href="glossary.html" class="internal-link" data-href="glossary.md" target="_self" rel="noopener nofollow"><h1 class="glossary">Glossary</h1></a>
-    <a  href="about.html" class="internal-link" data-href="about.md" target="_self" rel="noopener nofollow"><h1 class="about">About</h1></a>
+  	<ul>
+		<li class="nav">
+    			<a  href="/"  class="internal-link" data-href="index.md" target="_self" rel="noopener nofollow" >Home</a>
+		</li>
+		<li class="nav">
+    <a  href="methods.html"  class="internal-link" data-href="methods.md" target="_self" rel="noopener nofollow" >Methods</a>
+    		</li>
+		<li class="nav">
+    <a  href="practice.html" class="internal-link" data-href="practice.md" target="_self" rel="noopener nofollow">Practice</a>
+    		</li>
+		<li class="nav">
+    <a  href="glossary.html" class="internal-link" data-href="glossary.md" target="_self" rel="noopener nofollow">Glossary</h1></a>
+    		</li>
+		<li class="nav">
+    <a  href="about.html" class="internal-link" data-href="about.md" target="_self" rel="noopener nofollow">About</a>
+    		</li>
+	</ui>
   </nav>
 </body>
 

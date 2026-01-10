@@ -94,16 +94,24 @@ class obj2Mer {
         // chose an arrow type
         let arrow = this.arrowTypes[Math.floor(Math.random() * this.arrowTypes.length)];
         // get the nodes to go to and from
-        let from = node_names[Math.floor(Math.random() * node_names.length)]; //this.getRandomNodeIndx(this.graph_obj);
-        let to = node_names[Math.floor(Math.random() * node_names.length)]; //this.getRandomNodeIndx(this.graph_obj);
+        let from = Math.floor(Math.random() * node_names.length); //this.getRandomNodeIndx(this.graph_obj);
+        let to = Math.floor(Math.random() * node_names.length); //this.getRandomNodeIndx(this.graph_obj);
         // add text randomly to some arrows
         if (Math.random() > 0.65) {
           arrow += "| <h4>" + this.graph_obj.movements[Math.floor(Math.random() * this.graph_obj.movements.length)] + "</h4>|";
         }
-        // if arrow points to self 40% of time randomly loop it to another node
-        if (from == to && Math.random() > 0.4) {
-          to = node_names[Math.floor(Math.random() * node_names.length)];
+        // if arrow points to self % of time loop it to another node
+        if (from == to && Math.random() > 0) {
+          if (to < node_names.length -1){
+            to += 1;
+          }
+          else {
+            to = 0;
+          }
         }
+
+        from = node_names[from];
+        to = node_names[to];
         // add the arrows to the text
         graphText += from.toString() + arrow + to.toString() + "\n ";
       }
@@ -112,7 +120,7 @@ class obj2Mer {
       //  graphText += "style " + i.toString() + " fill:" + this.randomHexColorCode() + ",stroke:#333,color:#fff,stroke-width:4px" + "\n ";
       //}
 
-      console.log(graphText);
+      //console.log(graphText);
 
       let graphDefinition = await this.mermaidEval(graphText);
 
@@ -140,6 +148,8 @@ class obj2Mer {
 
     }
   };
+
+
 
   async mermaidEval(graphText) {
 
