@@ -97,8 +97,8 @@ class obj2Mer {
         let from = Math.floor(Math.random() * node_names.length); //this.getRandomNodeIndx(this.graph_obj);
         let to = Math.floor(Math.random() * node_names.length); //this.getRandomNodeIndx(this.graph_obj);
         // add text randomly to some arrows
-        if (Math.random() > 0.65) {
-          arrow += "| <h4>" + this.graph_obj.movements[Math.floor(Math.random() * this.graph_obj.movements.length)] + "</h4>|";
+        if ( this.graph_obj.movements != null && this.graph_obj.movements.length > 0 && Math.random() > 0.65) {
+          arrow += "| " + this.graph_obj.movements[Math.floor(Math.random() * this.graph_obj.movements.length)] + "|";
         }
         // if arrow points to self % of time loop it to another node
         if (from == to && Math.random() > 0) {

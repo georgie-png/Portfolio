@@ -24,7 +24,6 @@ function start() {
                     {"label":"affirmation", "img":"https://georgie-png.github.io/Portfolio/media/icons/cozy.svg", "url": "glossary.html"},
                     {"label":"backgrounds", "img":"https://georgie-png.github.io/Portfolio/media/icons/background.svg", "url": "glossary.html"},
                     {"label":"feel out", "img":"https://georgie-png.github.io/Portfolio/media/icons/in-configure.svg", "url": "glossary.html"},
-                    {"label":"make sense", "img":"https://georgie-png.github.io/Portfolio/media/icons/knowledge-graph.svg", "url": "glossary.html"},
                     {"label":"tables", "img":"https://georgie-png.github.io/Portfolio/media/icons/layers.svg", "url": "glossary.html"},
                   ],
                   "movements": [
